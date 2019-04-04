@@ -1,9 +1,0 @@
-package buscaminas_solver;
-
-public class Celda {
-	int value;
-	
-	public Celda(int value){
-		this.value
-	}
-}
