@@ -1,0 +1,27 @@
+package buscaminas_solver;
+
+public class Celda {
+	int value;
+	int prob;
+	
+	public int getProb() {
+		return prob;
+	}
+
+	public void setProb(int prob) {
+		this.prob = prob; 
+	}
+
+	public Celda(int value){
+		this.value=value;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+	
+}

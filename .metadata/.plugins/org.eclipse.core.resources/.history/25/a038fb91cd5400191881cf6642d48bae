@@ -1,0 +1,41 @@
+package buscaminas_solver;
+
+public class Celda {
+	int value;
+	int prob;
+	boolean vista;
+	public Celda(int value){
+		this.value=value;
+		this.vista=false;
+	}
+	
+	public String vista_to_str() {
+		
+	}
+	public int getProb() {
+		return prob;
+	}
+
+	public void setProb(int prob) {
+		this.prob = prob; 
+	}
+
+	
+
+	public boolean isVista() {
+		return vista;
+	}
+
+	public void setVista(boolean vista) {
+		this.vista = vista;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+	
+}

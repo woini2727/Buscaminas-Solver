@@ -1,0 +1,5 @@
+package buscaminas_solver;
+
+public class Celda {
+	int value;
+}
