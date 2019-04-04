@@ -1,0 +1,3 @@
+INDEX VERSION 1.130+C:\Users\Salvador\Desktop\Sistemas Inteligentes\buscaminas_solver\.metadata\.plugins\org.eclipse.jdt.core
+639307023.index
+4004584427.index
