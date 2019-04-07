@@ -6,8 +6,8 @@ public class Solver {
 	final int BUSCAMINAS_SIZE=9;
 	
 	public Celda[][] clickBlanco(Celda[][]tablero,int col,int fila){   //muestro los adyacentes
-		//System.out.println("col: "+col+ " fila: "+fila);
-		for(int i=0;i<BUSCAMINAS_SIZE;i++) {
+		ArrayList<Celda>lista_ady=new ArrayList<Celda>();
+		/*for(int i=0;i<BUSCAMINAS_SIZE;i++) {
 			for(int j=0;j<BUSCAMINAS_SIZE;j++) {
 				if((j==col-1 || j==col+1 || j==col) && (i==fila-1 || i==fila+1 ||i==fila) ) {
 					//System.out.println("col: "+j+ " fila: "+i);
@@ -15,14 +15,24 @@ public class Solver {
 					
 				}
 			}
+		}*/
+
+		lista_ady=get_ady(tablero, col, fila);
+		for(Celda ady:lista_ady ) {
+			int col1=0;
+			int fila1=0;
+			col1= ady.getCol();
+			fila1=ady.getFila();
+			tablero[col1][fila1].setVista(true);
 		}
 				
 		return tablero;
 		
 	}
 	public Celda[][] clickNum(Celda[][]tablero,int col,int fila){ //muestro los blancos adyacentes
+		ArrayList<Celda>lista_ady=new ArrayList<Celda>();
 		//System.out.println("col: "+col+ " fila: "+fila);
-		for(int i=0;i<BUSCAMINAS_SIZE;i++) {
+		/*for(int i=0;i<BUSCAMINAS_SIZE;i++) {
 			for(int j=0;j<BUSCAMINAS_SIZE;j++) {
 				if((j==col-1 || j==col+1 || j==col) && (i==fila-1 || i==fila+1 ||i==fila) ) {
 					if(tablero[i][j].getValue()==0 || (col==j && fila==i)) {
@@ -32,8 +42,21 @@ public class Solver {
 
 				}
 			}
+		}*/
+		lista_ady=get_ady(tablero, col, fila);
+		for(Celda ady:lista_ady ) {
+			int col1=0;
+			int fila1=0;
+			col1= ady.getCol();
+			fila1=ady.getFila();
+			if(tablero[col1][fila1].getValue()==0 ) {
+				//System.out.println("Valor: "+tablero[i][j].getValue());
+				tablero[col1][fila1].setVista(true);
+			}
+			
 		}
-		
+		tablero[col][fila].setVista(true);
+			
 		return tablero;
 		
 	}
@@ -41,7 +64,6 @@ public class Solver {
 		ArrayList<Celda>listaVistos=new ArrayList<Celda>();
 		for (int i=0;i<BUSCAMINAS_SIZE;i++) {
 			for(int j=0;j<BUSCAMINAS_SIZE;j++){
-				
 				if(tablero[i][j].isVista()==true) {
 					listaVistos.add(new Celda(tablero[i][j].getValue(),tablero[i][j].getCol(),tablero[i][j].getFila()));	
 				}
@@ -50,8 +72,10 @@ public class Solver {
 		return listaVistos;
 	}
 		
-	public ArrayList<Celda> checkNumbs(Celda[][] tablero){
+	//busco los numeros del tablero
+	public ArrayList<Celda> checkNumbs(Celda[][] tablero){ 
 		ArrayList<Celda>lista_Num=new ArrayList<Celda>();
+		ArrayList<Celda>lista_ady=new ArrayList<Celda>();
 		for (int i=0;i<BUSCAMINAS_SIZE;i++) {
 			for(int j=0;j<BUSCAMINAS_SIZE;j++){
 				if((tablero[i][j].isVista()==true) && (tablero[i][j].getValue()>0)) {
@@ -59,6 +83,7 @@ public class Solver {
 					}
 				}
 			}
+		
 		return lista_Num;
 	}
 	public Celda[][]  clickNext(Celda[][] tablero){
@@ -71,7 +96,6 @@ public class Solver {
 			if(ady==true) {
 				ncol= lista_Num.get(i).getCol();
 				nfila=lista_Num.get(i).getFila();
-				//System.out.println(lista_Num.get(i).getCol()+"-"+ lista_Num.get(i).getFila());
 				tablero=colocarBombas(tablero,ncol,nfila);
 			}
 		}
@@ -155,4 +179,36 @@ public class Solver {
 		
 		return tablero;
 	}
+	public ArrayList<Celda> get_ady(Celda[][] tablero,int col,int fila){
+		ArrayList<Celda> lista_ady= new ArrayList<Celda>();
+		
+		if(col-1>=0){
+			lista_ady.add(tablero[col-1][fila]);
+			if(fila-1>=0) {
+				lista_ady.add(tablero[col-1][fila-1]);
+			}
+			if(fila+1<BUSCAMINAS_SIZE) {
+				lista_ady.add(tablero[col-1][fila+1]);
+			}
+		}
+		if(col+1<BUSCAMINAS_SIZE) {
+			lista_ady.add(tablero[col+1][fila]);
+			if(fila-1>=0) {
+				lista_ady.add(tablero[col+1][fila-1]);
+			}
+			if(fila+1<BUSCAMINAS_SIZE) {
+				lista_ady.add(tablero[col+1][fila+1]);
+			}
+		}
+		if(fila+1<BUSCAMINAS_SIZE) {
+			lista_ady.add(tablero[col][fila+1]);
+		}
+		if(fila-1>=0) {
+			lista_ady.add(tablero[col][fila-1]);
+		}
+		
+			
+		return  lista_ady;
+	}
+	
 }

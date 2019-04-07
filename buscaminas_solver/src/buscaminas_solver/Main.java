@@ -18,7 +18,7 @@ public class Main {
 		Celda [][] tablero= new Celda[BUSCAMINAS_SIZE][BUSCAMINAS_SIZE];
 		
 		//---Cargamos el juego desde un TXT---//
-		File myObj = new File("ee.txt");
+		File myObj = new File("ejemplo1.txt");
 		Scanner myReader = new Scanner(myObj);
 		int cont_i=0;
 		int cont_j=0; 
